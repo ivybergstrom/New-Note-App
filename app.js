@@ -15,7 +15,7 @@ function addTask(des){
 
     //creates new ID
     if (taskStore.length > 0){
-        ID = taskStore[TransformStreamDefaultController.length -1].id+1;
+       // ID = taskStore[TransformStreamDefaultController.length -1].id+1;
     } else {
         ID = 0;
     }
@@ -29,50 +29,54 @@ function addTask(des){
     //return new element
     return newTask;
 }
-//add task to UI
-function addListTask(task){
-    //create html strng with placeholder text
 
-    //replace placeholder with actual data
-}
 
 //UI CONTROLLER
 
-//Gather DOM strings same place
-const DOMStrings = {
-    addBtn: document.querySelector('.add_btn'),
-    taskDescription: document.querySelector('.ad_description'),
-    taskContainer: document.querySelector('.task_list'),
+//Gather DOM strings same place 
+var DOMStrings = {
+    addBtn: document.querySelector('.add_btn'), 
+    taskDescription: document.querySelector('.add_description'), 
+    taskContainer: document.querySelector('.task_list'), 
 }
 //add task to UI
-var html, newHtml, element;
+function addListTask(task){
+    var html, newHtml, element;
+    //create html string with placeholder text
+    html = '<div class = "item clearfix" id="%id%"><div class = "item_description"> %description% </div><div class = "right clearfix"><div class ="item_done"><button class= "item_done--btn">Task Completed<i class="ion-ios-checkmark-outline"> </i></button></div><div class = "item_delete"><button class = "item_delete--btn">Delete Task<i class = "ion-ios-close-outline"></i></button></div></div></div>';
 
-html = '<div class = "item clearfix" id="%id%"><div class = "item_description"> %description% </div><div class = "right clearfix"><div class ="item_done"><button class= "item_done--btn"><i class="ion-ios-checkmark-outline"> </i></button></div><div class = "item_delete"><button class = "item_delete--btn"><i class = "ion-ios-close-outline"></i></button></div></div></div>'
+    //replace placeholder with actual data
+    newHtml = html.replace('%id%', task.id);
+    newHtml = newHtml.replace('%description%', task.description);
+    
+    //insert HTML into the DOM
+    element = DOMStrings.taskContainer;
+    element.insertAdjacentHTML('beforeEnd', newHtml);
+}
 
-//replace the placeholder with actual data
-newHtml = html.replace('%id%', task.id);
-newHtml = newHtml.replace('%description%', task.description);
 
-//insert html into the dom
-element = DOMStrings.taskContainer;
-element.insertAdjacentHTML('beforeBegin', newHtml);
+
 
 //APP CONTROLLER
 
 function ctrlAddTask(){
     var input, text, newTask;
+
+
     //Get input data from DOM
     input = DOMStrings.taskDescription;
     text = input.value;
+   
 
     //check for text
 if (text) {
-
-     //Add the task to the data structure
+    //Add the task to the data structure
     newTask = addTask(text);
     //Add the task to the UI
     addListTask(newTask);
     //Clear the field
+    input.value = '';
+    input.focus();
 }
 
    
@@ -81,7 +85,7 @@ if (text) {
 DOMStrings.addBtn.addEventListener('click', ctrlAddTask);
 
 document.addEventListener('keypress', function(e) {
-    if (e.keyCode === 13 || e.which === 13) {
+    if (e.key === 13) { //this originally was an || e.which === 13, but it looks like browsers may no longer support e.which
         ctrlAddTask();
     }
 });
