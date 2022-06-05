@@ -37,9 +37,12 @@ function addListTask(task){
 }
 
 //UI CONTROLLER
+
+//Gather DOM strings same place
 const DOMStrings = {
     addBtn: document.querySelector('.add_btn'),
     taskDescription: document.querySelector('.ad_description'),
+    taskContainer: document.querySelector('.task_list'),
 }
 //add task to UI
 var html, newHtml, element;
@@ -49,10 +52,10 @@ html = '<div class = "item clearfix" id="%id%"><div class = "item_description"> 
 //replace the placeholder with actual data
 newHtml = html.replace('%id%', task.id);
 newHtml = newHtml.replace('%description%', task.description);
-taskContainer: document.querySelector('.task_list'),
+
 //insert html into the dom
 element = DOMStrings.taskContainer;
-element.insertAdjacentHTML('beforehand', newHtml);
+element.insertAdjacentHTML('beforeBegin', newHtml);
 
 //APP CONTROLLER
 
