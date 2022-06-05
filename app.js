@@ -1,5 +1,6 @@
 // DATA CONTROLLER
 
+
 //stores tasks that we add
 var taskStore = [];
 
@@ -15,13 +16,12 @@ function addTask(des){
 
     //creates new ID
     if (taskStore.length > 0){
-       // ID = taskStore[TransformStreamDefaultController.length -1].id+1;
+       ID = taskStore[taskStore.length -1].id + 1;
     } else {
         ID = 0;
     }
     
     //create new task
-
     newTask = new task( ID, des);
 
     //push into data structure
@@ -29,7 +29,20 @@ function addTask(des){
     //return new element
     return newTask;
 }
-
+//Delete Task
+function deleteTask(id){
+    var ids, index;
+    //create array for ids
+    ids = taskStore.map(function(current){
+        return current.id;
+    });
+    //find IDs index 
+    index = ids.indexOf(parseInt(id));
+    //delete task
+    if (index !== -1){
+        taskStore.splice(index, 1);
+    }
+};
 
 //UI CONTROLLER
 
@@ -80,6 +93,20 @@ if (text) {
 }
 
    
+};
+
+function ctrlDeleteTask(event){
+    var taskID;
+    //find ID
+    taskID = event.target.parentNode.parentNode.parentNode.id;
+
+    //check if there is an ID
+    if (taskID) {
+        //delete task from data structure
+        deleteTask(taskID);
+        //delete task from the UI
+        
+    }
 }
 
 DOMStrings.addBtn.addEventListener('click', ctrlAddTask);
@@ -89,3 +116,5 @@ document.addEventListener('keypress', function(e) {
         ctrlAddTask();
     }
 });
+
+DOMStrings.taskContainer.addEventListener('click', ctrlDeleteTask);
