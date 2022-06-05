@@ -34,7 +34,7 @@ function deleteTask(id){
     var ids, index;
     //create array for ids
     ids = taskStore.map(function(current){
-        return current.id;
+        return current.id; 
     });
     //find IDs index 
     index = ids.indexOf(parseInt(id));
@@ -65,6 +65,15 @@ function addListTask(task){
     //insert HTML into the DOM
     element = DOMStrings.taskContainer;
     element.insertAdjacentHTML('beforeEnd', newHtml);
+}
+//Delete task from UI
+function deleteListTask(selectorID){
+    var el;
+
+    el = document.getElementById(selectorID);
+
+    //remove HTML from DOM
+    el.remove();
 }
 
 
@@ -105,6 +114,7 @@ function ctrlDeleteTask(event){
         //delete task from data structure
         deleteTask(taskID);
         //delete task from the UI
+        deleteListTask(taskID);
         
     }
 }
