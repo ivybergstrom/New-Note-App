@@ -75,6 +75,18 @@ function deleteListTask(selectorID){
     //remove HTML from DOM
     el.remove();
 }
+//Done button 
+function doneListTask(selectorID) {
+    var el;
+
+    el = document.getElementById(selectorID);
+
+    //add new class for description
+    el.firstElementChild.classList.toggle("item_description_done");
+    //add new class for done btn
+    el.children[1].children[0].children[0].classList.toggle("item_done--btn ");
+
+}
 
 
 
@@ -84,11 +96,9 @@ function deleteListTask(selectorID){
 function ctrlAddTask(){
     var input, text, newTask;
 
-
     //Get input data from DOM
     input = DOMStrings.taskDescription;
     text = input.value;
-   
 
     //check for text
 if (text) {
@@ -99,24 +109,29 @@ if (text) {
     //Clear the field
     input.value = '';
     input.focus();
-}
-
-   
+}   
 };
 
 function ctrlDeleteTask(event){
-    var taskID;
+    var taskID, clickedElement;
+    const doneBtn = "item_done--btn";
+    clickedElement = event.target.className;
+    
     //find ID
     taskID = event.target.parentNode.parentNode.parentNode.id;
-
-    //check if there is an ID
-    if (taskID) {
+    //check if done btn
+    if(clickedElement === doneBtn) {
+        //change ui
+    doneListTask(taskID);
+        //check is there any id
+    } else if (taskID ) {
         //delete task from data structure
         deleteTask(taskID);
         //delete task from the UI
         deleteListTask(taskID);
-        
+
     }
+
 }
 
 DOMStrings.addBtn.addEventListener('click', ctrlAddTask);
