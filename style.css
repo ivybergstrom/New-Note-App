@@ -1,0 +1,43 @@
+html{
+    font-size: 62.5%;
+}
+
+.top{
+    width: 100%;
+    background: #735751;
+}
+
+
+.project_title{
+    color: #E7D7C1;
+    display:flex;
+    font-size: 2em;
+    font-family: 'Righteous', cursive;
+    justify-content: center;
+}
+
+
+
+.bottom{
+    background-color: #A78A7F;
+    display: flex;
+    font-size: 1em;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.add_btn, input{
+    padding: 10px;
+    margin-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.add_btn{
+    background-color: #BF4342;
+    color: #E7D7C1;
+    border:#E7D7C1 3px solid;
+}
+.input{
+    background-color: #E7D7C1;
+    color: #8C1C13;
+}
