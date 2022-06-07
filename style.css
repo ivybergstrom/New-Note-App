@@ -37,7 +37,14 @@ html{
     color: #E7D7C1;
     border:#E7D7C1 3px solid;
 }
-.input{
+input{
     background-color: #E7D7C1;
     color: #8C1C13;
+    font-size: 1em;
+    border: none;
+    height: 20px;
+}
+
+.task_list{
+    border:#8C1C13;
 }
